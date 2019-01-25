@@ -10,27 +10,40 @@ export default class Game extends React.Component{
         super(props);
         this.state = {
             feedback: "Make your guess!",
-            count: 3,
             guesses: [10, 15, 25],
             answer: 50
         };
     }
 
     addGuess(input){
+        // if(isNaN(input)){
+        //     this.setState({feedback: 'Please enter a valid number'});
+        //     return ;
+
         this.setState({
             guesses: [...this.state.guesses, input]
         })
-    }
+        }
+
+
+
+
+       
+    
 
     
     render(){
+        const {feedback, guesses} = this.state;
+        const guessCount = guesses.length
     return (
         <div>
             <Header />
-            <GuessSection feedback={this.state.feedback}
-                          handleSubmit = {this.addGuess} />
-            <GuessCount count={this.state.count} />
-            <GuessList guesses={this.state.guesses} />
+            <main role="main">
+            <GuessSection feedback={feedback}
+                          guessCount = {guessCount}
+                          onAddGuess = {guess => this.addGuess(guess)}/>
+            <GuessList guesses={guesses} />
+            </main>
         </div>
     );
 }
