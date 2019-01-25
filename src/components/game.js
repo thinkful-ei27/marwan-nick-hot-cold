@@ -10,25 +10,67 @@ export default class Game extends React.Component{
         super(props);
         this.state = {
             feedback: "Make your guess!",
-            count: 3,
-            guesses: [10, 15, 25],
-            answer: 50
+            count: 1,
+            guesses: [],
+            answer: Math.floor(Math.random() * 100) + 1,
+            rules: false
         };
     }
 
-    addGuess(input){
+    resetAll(){
         this.setState({
-            guesses: [...this.state.guesses, input]
+            feedback: "Make your guess!",
+            count: 1,
+            guesses: [],
+            answer: Math.floor(Math.random() * 100) + 1
         })
+    };
+
+    updateFeedback(number, answer, array){
+        console.log(this.state.answer);
+        if(array.length-1 <= 0){
+            return "Make another guess!";
+        } else if(number === this.state.answer){
+            return "Correct!!!";
+        } else if(Math.abs(answer - array[array.length-2]) > Math.abs(answer - number)){
+            return "Hotter!";
+        } else return "Colder...";
     }
 
+    addGuess(input){
+        console.log(input);
+        let newNumber = this.state.count + 1;
+        let newArray = [...this.state.guesses, Number(input)];
+        let answer = this.state.answer;
+        this.setState({
+            guesses: newArray,
+            count: newNumber,
+            feedback: this.updateFeedback(Number(input), answer, newArray)
+        });
+    }
+
+    editRules(){
+        let notState = !this.state.rules;
+        this.setState({
+            rules: notState
+        });
+    }
+
+    returnObjectIfTrue(conditional, object){
+        if(conditional){
+            return object;
+        }
+    }
     
     render(){
     return (
         <div>
-            <Header />
+            <Header handleHelp = {(e) => {this.editRules()}}
+                    handleNewGame = {(e) => {this.resetAll()}}
+                    rules={this.state.rules}
+                    ifTrue={this.returnObjectIfTrue}/>
             <GuessSection feedback={this.state.feedback}
-                          handleSubmit = {this.addGuess} />
+                          handleSubmit = {(e) => {this.addGuess(e)}} />
             <GuessCount count={this.state.count} />
             <GuessList guesses={this.state.guesses} />
         </div>

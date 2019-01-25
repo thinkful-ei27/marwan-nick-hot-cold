@@ -12,6 +12,13 @@ input {
 	border-radius: 4px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 input.button {
 	background: #1F253D;
 	color: #95a5a6;
