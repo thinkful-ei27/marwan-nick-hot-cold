@@ -26,6 +26,19 @@ export default class Game extends React.Component{
         })
     };
 
+
+    validateNumber(number){
+        console.log(number);
+        console.log(this.state.guesses);
+        let tempArray = [...this.state.guesses];
+        tempArray = tempArray.filter(num => Number(number) === Number(num)); 
+        console.log(tempArray);
+        if(tempArray.length === 1){
+            return false;
+        } else return true;
+    }
+
+
     updateFeedback(number, answer, array){
         console.log(this.state.answer);
         if(array.length-1 <= 0){
@@ -38,6 +51,7 @@ export default class Game extends React.Component{
     }
 
     addGuess(input){
+        if(this.validateNumber(input)){
         console.log(input);
         let newNumber = this.state.count + 1;
         let newArray = [...this.state.guesses, Number(input)];
@@ -46,7 +60,11 @@ export default class Game extends React.Component{
             guesses: newArray,
             count: newNumber,
             feedback: this.updateFeedback(Number(input), answer, newArray)
-        });
+        })} else {
+            this.setState({
+                feedback: "Can't pick the same number twice!"
+            })
+        }
     }
 
     editRules(){
