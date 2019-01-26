@@ -11,7 +11,7 @@ if(this.props.onAddGuess) {
     this.props.onAddGuess(val);
 }
 
-this.input.value;
+this.input.value = '';
 
 }
 
