@@ -7,8 +7,8 @@ export default function TopNav(props) {
         <nav>
             <ul className="clearfix">
                 <li>
-                    <a  className="what" href="#"
-                    onClick={() => props.handleInfo()} >
+                    <a className="what" href="#"
+                        onClick={() => props.handleInfo()} >
 
                         What?
 

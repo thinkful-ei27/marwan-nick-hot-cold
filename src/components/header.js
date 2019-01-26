@@ -1,17 +1,16 @@
 import React from 'react';
 
 import TopNav from './top-nav';
-import InfoModal from './info-modal';
 
 import './header.css';
 
 export default function Header(props) {
     return (
         <header>
-            <TopNav 
-            onNewGame={() => props.onNewGame()}
-            handleInfo={() => props.handleInfo()}
-            
+            <TopNav
+                onNewGame={() => props.onNewGame()}
+                handleInfo={() => props.handleInfo()}
+
             />
             <h1>HOT or COLD</h1>
         </header>

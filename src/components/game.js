@@ -61,6 +61,7 @@ export default class Game extends React.Component {
             feedback = 'You are so Hot!';
         } else {
             feedback = 'You got it! Start a NEW GAME !';
+
         }
 
         this.setState({
@@ -83,8 +84,8 @@ export default class Game extends React.Component {
 
         return (
             <div>
-                <Header onNewGame={() => this.newGame()} 
-                handleInfo={() => this.handleInfo()}/>
+                <Header onNewGame={() => this.newGame()}
+                    handleInfo={() => this.handleInfo()} />
                 <main id="main" role="main">
                     <GuessSection feedback={feedback}
                         guessCount={guessCount}
